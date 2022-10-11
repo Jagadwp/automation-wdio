@@ -20,7 +20,7 @@ exports.config = {
   // then the current working directory is where your `package.json` resides, so `wdio`
   // will be called from there.
   //
-  specs: ['./test/specs/**/*.js'],
+  specs: ['./test/specs/e2e/**/*.js'],
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -209,6 +209,26 @@ exports.config = {
     browser.addCommand('waitAndClick', async (selector) => {
       await $(selector).waitForDisplayed();
       await $(selector).click();
+    });
+
+    browser.addCommand('sauceLogin', async () => {
+      let usernameInput = await $('//input[contains(@id, "user-name")]');
+      let passwordInput = await $('#password');
+      let loginButton = await $('#login-button');
+
+      await (await $('.login-box')).waitForDisplayed();
+      await usernameInput.setValue('standard_user');
+      await passwordInput.setValue('secret_sauce');
+      await browser.pause(2000);
+      await loginButton.click();
+    });
+
+    browser.addCommand('sauceLogout', async () => {
+      await browser.waitAndClick('#react-burger-menu-btn');
+      await (await $('#logout_sidebar_link')).waitForClickable();
+      await (await $('#logout_sidebar_link')).click();
+      await (await $('.login-box')).waitForDisplayed();
+      await browser.pause(2000);
     });
   },
   /**
