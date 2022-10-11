@@ -193,10 +193,22 @@ exports.config = {
    * @param {Object}         browser      instance of created browser/device session
    */
   before: function (capabilities, specs) {
-    browser.addCommand('customUploadFile', async (path) => {
+    browser.addCommand('customFileUpload', async (path, uploadBoxSelector, submitUploadSelector) => {
       const file = await browser.uploadFile(path);
-      await $('#file-upload').setValue(file);
-      await $('#file-submit').click();
+      await $(uploadBoxSelector).setValue(file);
+      await $(submitUploadSelector).click();
+    });
+
+    browser.addCommand('getTitleAndUrl', async () => {
+      return {
+        title: await browser.getTitle(),
+        url: await browser.getUrl(),
+      };
+    });
+
+    browser.addCommand('waitAndClick', async (selector) => {
+      await $(selector).waitForDisplayed();
+      await $(selector).click();
     });
   },
   /**
