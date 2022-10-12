@@ -1,4 +1,4 @@
-describe('Advance Testing', () => {
+describe.skip('Advance Testing', () => {
   beforeEach(async () => {
     await loadWebsite();
   });

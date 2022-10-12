@@ -3,7 +3,7 @@ const bigPause = 5000;
 const massivePause = 10000;
 
 describe.skip('My First Test Suite', () => {
-  it('Masuk Integra', async () => {
+  it.only('Masuk Integra', async () => {
     await browser.url('https://my.its.ac.id/');
 
     // Login
