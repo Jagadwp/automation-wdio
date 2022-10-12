@@ -14,7 +14,7 @@ describe.skip('My First Test Suite', () => {
 
     await usernameInput.setValue('05111940000132');
     await nextButton.click();
-    await passwordInput.setValue('Allahcuma1');
+    await passwordInput.setValue('dummy');
     await loginButton.click();
 
     // Masuk Integra
